@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Ideias Criativas</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3039/3039434.png">
+  <meta name="description" content="Gerador de ideias criativas  H3>"Descubra sugestões para conteúdos, negócios e muito mais!"</H3>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #dff0ff, #f7fcff);
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background: #0077cc;
+      color: white;
+      padding: 30px 20px;
+      font-size: 2em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .banner {
+      width: 100%;
+      height: 120px;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      color: #666;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    #ideia {
+      margin-top: 20px;
+      font-size: 18px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #f1f1f1;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    💡 Gerador de Ideias Criativas por Nicho
+  </header>
+
+  <div class="banner">[ Espaço para Banner ou Anúncio Google AdSense ]</div>
+
+  <div class="container">
+    <p>Escolha um nicho e clique no botão para gerar uma ideia criativa!</p>
+    <div class="botoes" id="botoes-nichos">
+      <!-- Botões de nicho -->
+    </div>
+    <button onclick="mostrarIdeia()">Gerar Ideia</button>
+    <div id="ideia">A ideia aparecerá aqui...</div>
+  </div>
+
+  <footer>
+    <p><a href="#">Política de Privacidade</a> | <a href="#">Contato</a></p>
+    <p>&copy; 2025 Gerador de Ideias</p>
+  </footer>
+
+  <script>
+    const ideiasPorNicho = {
+                                                            'Saúde': ["Dicas para melhorar a imunidade", "Rotina de cuidados preventivos", "Exercícios fáceis para fazer em casa", "Alimentos funcionais para o dia a dia", "Importância do sono na saúde"],
+      'Finanças': ["Como economizar ganhando pouco", "Investimentos para iniciantes", "Planejamento financeiro mensal", "Como sair das dívidas", "Ideias para renda extra em casa"],
+      'Relacionamentos': ["Como melhorar a comunicação no casal", "Atividades divertidas para fazer juntos", "Dicas para relacionamento à distância", "Como lidar com o ciúmes de forma saudável", "Ideias para presentear sem gastar muito"],
+      'Moda e Estilo': ["Looks básicos para o dia a dia", "Como combinar cores de roupa", "Moda consciente e consumo inteligente", "Tendências de moda acessíveis", "Estilo pessoal com roupas simples"],
+      'Espiritualidade': ["Exercícios de gratidão diários", "Técnicas de meditação guiada", "Como elevar sua energia pessoal", "Reflexões sobre propósito de vida", "Journaling espiritual para autoconhecimento"],
+      'Tecnologia': ["Técnicas para proteger sua privacidade online", "Apps gratuitos que facilitam a vida", "Tendências tecnológicas para o futuro", "Automatização de tarefas domésticas com tecnologia", "Como aprender a programar do zero"],
+      'Educação': ["Melhores plataformas de cursos gratuitos", "Dicas para estudar com foco", "Como organizar uma rotina de estudos", "Técnicas de aprendizagem ativa", "Educação financeira na infância"],
+      'Culinária': ["Receitas rápidas com 3 ingredientes", "Como montar marmitas saudáveis", "Sobremesas geladas fáceis", "Cozinhando com o que tem na geladeira", "Almoço de domingo econômico e saboroso"],
+      'Pets': ["Dicas de brinquedos caseiros para pets", "Alimentos proibidos para cães e gatos", "Como ensinar comandos básicos", "Rotina ideal para um pet feliz", "Dicas para adestramento positivo"],
+      'Beleza e Cuidados Pessoais': ["Rotina de skincare simples", "Dicas de hidratação capilar em casa", "Como fazer spa day sem gastar muito", "Maquiagem rápida para o dia a dia", "Cuidados com as unhas de forma natural"],
+      'Viagens': ["Destinos baratos no Brasil", "Como planejar uma viagem solo", "Checklist essencial para viajar", "Dicas de viagem para iniciantes", "Como viajar de forma sustentável"],
+      'Esportes e Fitness': ["Treino funcional para iniciantes", "Como manter a motivação para treinar", "Benefícios do alongamento diário", "Atividades físicas sem academia", "Desafios fitness para fazer em casa"],
+      'Negócios e Empreendedorismo': ["Ideias de negócio com baixo investimento", "Como validar sua ideia de produto", "Negócios digitais para começar hoje", "Como criar uma marca pessoal", "Erros comuns de quem começa a empreender"],
+      'Hobbies e DIY': ["Como fazer velas artesanais", "Projetos DIY para decorar casa", "Como desenhar mesmo sem saber", "Ideias de hobbies criativos", "Como montar um cantinho de arte"],
+      'Autoajuda e Desenvolvimento Pessoal': ["Como criar hábitos positivos", "Técnicas para melhorar a autoestima", "Journaling para autoconhecimento", "Como vencer a procrastinação", "Dicas para sair da zona de conforto"],
+      'Casa e Decoração': ["Decoração minimalista com pouco dinheiro", "Como organizar armários pequenos", "Dicas para limpar a casa rapidamente", "Como transformar ambientes com luzes", "Idéias de decoração com materiais recicláveis"],
+      'Marketing Digital': ["Como crescer no Instagram organicamente", "Ideias de posts para redes sociais", "Funil de vendas simples para iniciantes", "Estratégias de marketing de conteúdo", "Como usar gatilhos mentais de forma ética"],
+      'Carreira e Empregos': ["Como melhorar seu currículo", "Dicas para entrevistas de emprego", "Como se destacar no LinkedIn", "Transição de carreira com segurança", "Habilidades em alta no mercado atual"],
+      'Pais e Filhos': ["Atividades educativas para fazer em casa", "Como lidar com birras", "Ideias de brincadeiras simples", "Dicas para rotina leve com crianças", "Como ensinar responsabilidades desde cedo"],
+      'Sustentabilidade e Meio Ambiente': ["Como reduzir o uso de plástico", "Compostagem doméstica para iniciantes", "Ideias para reutilizar objetos", "Dicas de economia de energia", "Moda sustentável: como aderir"],
+      'Arte e Design': ["Desafio de desenho diário", "Técnicas de pintura para relaxar", "Como montar um portfólio online", "Ferramentas grátis para criar arte digital", "Estudos de artistas inspiradores"],
+      'Cinema e Séries': ["Listas de filmes para refletir", "Curiosidades sobre bastidores", "Melhores séries por gênero", "Roteiro de maratona de final de semana", "Filmes baseados em histórias reais"],
+      'Música': ["Playlists para diferentes humores", "História de gêneros musicais", "Como descobrir novas bandas", "Dicas de apps musicais gratuitos", "Entrevistas com músicos locais"],
+      'Livros e Literatura': ["Livros para quem quer começar a ler", "Resumos de obras clássicas", "Desafio de leitura mensal", "Melhores livros de desenvolvimento pessoal", "Como montar um clube do livro"],
+      'Ciência e Curiosidades': ["Experimentos caseiros para crianças", "Fatos curiosos sobre o universo", "Grandes descobertas científicas", "Histórias da ciência que você não sabia", "Como funciona o corpo humano"],
+      'Games e Cultura Geek': ["Dicas de jogos indie pouco conhecidos", "Como montar um setup gamer com baixo custo", "Tendências geek que estão em alta", "Curiosidades sobre sagas de jogos famosas", "Como criar conteúdo de gameplay atrativo"],
+      'Humor e Entretenimento': ["Desafios engraçados para fazer com amigos", "Piadas curtas para animar o dia", "Criação de memes usando tendências atuais", "Vídeos curtos de situações do cotidiano", "Roteiros para esquetes de humor no TikTok"],
+      'Fotografia e Imagem': ["Ideias de fotos criativas com celular", "Como editar imagens usando apps gratuitos", "Técnicas para fotos noturnas impressionantes", "Projetos de fotografia 30 dias", "Estilos de fotografia e como praticá-los"],
+      'História e Cultura Geral': ["Fatos históricos pouco conhecidos", "Linha do tempo de eventos marcantes", "Perfis de personagens históricos importantes", "Análise de mudanças culturais ao longo do tempo", "Histórias curiosas de civilizações antigas"],
+      'Psicologia e Comportamento': ["Como funciona o cérebro em situações de estresse", "Técnicas de autocontrole emocional", "Dicas de livros sobre psicologia popular", "Comportamentos humanos explicados pela ciência", "Como melhorar seus hábitos com base na psicologia"
+      'Saúde': ["Dica 1 de saúde", "Dica 2 de saúde"],
+      'Finanças': ["Dica 1 de finanças", "Dica 2 de finanças"],
+      'Relacionamentos': ["Dica 1 de relacionamentos", "Dica 2 de relacionamentos"],
+      'Moda e Estilo': ["Dica 1 de moda", "Dica 2 de moda"],
+      'Espiritualidade': ["Dica 1 de espiritualidade", "Dica 2 de espiritualidade"],
+      // ... outros nichos aqui até 30
+      'Psicologia e Comportamento': ["Dica 1 de psicologia", "Dica 2 de psicologia"]
+    };
+
+    const nichos = Object.keys(ideiasPorNicho);
+    const containerBotoes = document.getElementById("botoes-nichos");
+    let nichoSelecionado = null;
+
+    nichos.forEach(nicho => {
+      const btn = document.createElement("button");
+      btn.textContent = nicho;
+      btn.onclick = () => {
+        nichoSelecionado = nicho;
+        document.getElementById("ideia").innerText = `Nicho selecionado: ${nicho}`;
+      };
+      containerBotoes.appendChild(btn);
+    });
+
+    function mostrarIdeia() {
+      if (!nichoSelecionado || !ideiasPorNicho[nichoSelecionado]) {
+        document.getElementById("ideia").innerText = "Por favor, selecione um nicho antes de gerar a ideia.";
+        return;
+      }
+      const lista = ideiasPorNicho[nichoSelecionado];
+      const ideia = lista[Math.floor(Math.random() * lista.length)];
+      document.getElementById("ideia").innerText = ideia;
+    }
+  </script>
+</body>
+</html>
